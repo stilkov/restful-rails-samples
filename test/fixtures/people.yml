@@ -1,0 +1,7 @@
+# let's build a few hundred customers so we don't get bored
+<% (1..1000).each do |count|%>
+Person_<%= count %>:
+  last_name: Name_<%= count %>
+  given_name: Given_<%= count %>
+  customer: Customer_<%= count / 2 %>
+<% end %>
