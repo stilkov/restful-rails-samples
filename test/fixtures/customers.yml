@@ -1,7 +1,0 @@
-# let's build a few hundred customers so we don't get bored
-<% (1..500).each do |count|%>
-Company_<%= count %>:
-  name: Name_<%= count %>
-  city: city_<%= count %>
-  country: Country_<%= count %>
-<% end %>

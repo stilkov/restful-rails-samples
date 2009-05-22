@@ -1,0 +1,14 @@
+<p>
+  <b>Name:</b>
+  <%=h @company.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @company.address %>
+</p>
+
+<%= link_to 'People', company_people_path(@company) %>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Home', companies_path %>

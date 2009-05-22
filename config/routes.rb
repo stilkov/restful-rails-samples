@@ -1,5 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :customers do |customers|
-    customers.resources :people
+  map.resources :people
+
+  map.resources :people
+
+  map.resources :companies do |company|
+    company.resources :people
   end
 end

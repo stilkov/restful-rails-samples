@@ -1,9 +1,9 @@
 class CreatePeople < ActiveRecord::Migration
   def self.up
     create_table :people do |t|
-      t.string :last_name
-      t.string :given_name
-      t.integer :customer_id
+      t.string :first
+      t.string :last
+      t.integer :company_id
 
       t.timestamps
     end
