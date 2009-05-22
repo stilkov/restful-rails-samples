@@ -1,0 +1,1 @@
+Rails is a great environment for building RESTful web apps and web services. This is a simple example application that shows how to use the built-in support for HTTP features. It also illustrates how to do some more advanced stuff, e.g. conflict detection and deep ETags. This is a work in progress, feedback is welcome, forking encouraged.
