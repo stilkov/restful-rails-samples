@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  # make sure we have a company context
   before_filter :get_company, :only => ['index', 'create']
   
   def get_company
