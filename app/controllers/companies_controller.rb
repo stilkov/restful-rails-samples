@@ -2,14 +2,11 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.paginate :page => params[:page], :per_page => 10, :order => 'created_at DESC'
-    expires_in 30.seconds
-    if stale?(:last_modified => Company.maximum('updated_at').utc, :etag => @companies, :public => true) 
-      respond_to do |format|
-        format.html # index.html.erb
-        format.xml  { render :xml => @companies }
-        format.json { render :json => @companies }
-      end
+    @companies = Company.find(:all)
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @companies }
+      format.json { render :json => @companies }
     end
   end
   
@@ -17,13 +14,10 @@ class CompaniesController < ApplicationController
   # GET /companies/1.xml
   def show
     @company = Company.find(params[:id])
-    expires_in 30.seconds
-    if stale?(:last_modified => @company.updated_at.utc, :etag => @company, :public => true)
-      respond_to do |format|
-        format.html # show.html.erb
-        format.xml  { render :xml => @company }
-      end                   
-    end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @company }
+    end                   
   end                                            
 
   # GET /companies/new
@@ -63,28 +57,18 @@ class CompaniesController < ApplicationController
   # PUT /companies/1.xml
   def update
     @company = Company.find(params[:id])
-    if precondition_met?(@customer)   
       respond_to do |format|
-        if @company.update_attributes(params[:company])
-          flash[:notice] = 'Company was successfully updated.'
-          format.html { redirect_to(@company) }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @company.errors, :status => :unprocessable_entity }
-        end
+      if @company.update_attributes(params[:company])
+        flash[:notice] = 'Company was successfully updated.'
+        format.html { redirect_to(@company) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @company.errors, :status => :unprocessable_entity }
       end
-    else
-      head :precondition_failed
     end
   end
                     
-  def precondition_met?(obj)
-    response.etag = obj
-    if_match_header = request.headers['IF-MATCH']
-    if_match_header.nil? || (if_match_header == response.etag)
-  end
-
   # DELETE /companies/1
   # DELETE /companies/1.xml
   def destroy

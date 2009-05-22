@@ -1,9 +1,10 @@
 class PeopleController < ApplicationController
-  before_filter :get_company, :only => 'index'
+  before_filter :get_company, :only => ['index', 'create']
   
   def get_company
     @company = Company.find(params[:company_id])
   end
+
   # GET /people
   # GET /people.xml
   def index
